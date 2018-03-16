@@ -1,9 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
-  },
-  "splash":{
-    "image": "./assets/wp.png",
-    "backgroundColor": "#FEF9B0"
+    "sdkVersion": "25.0.0",
+    "name": "Lending App",
+    "primaryColor": "#30396c",
+    "icon":"./assets/wordpress.png",
+    "splash":{
+      "image": "./assets/wp.png",
+      "backgroundColor": "#f7f7f7",
+      "resizeMode": "contain",
+      "flex": 1
+    }
   }
 }
