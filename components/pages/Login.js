@@ -10,6 +10,9 @@ import {
     Image
 } from 'react-native';
 
+import Register from "./Register";
+
+
 const Form = t.form.Form;
 
 // clone the default stylesheet
@@ -18,6 +21,22 @@ const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
 // overriding the form styling
 stylesheet.textbox.normal.minWidth = '80%';
 stylesheet.textbox.normal.color = '#fff';
+stylesheet.controlLabel.normal.fontFamily = 'proxima-nova-light';
+stylesheet.textbox.normal.borderWidth = 0;
+stylesheet.textbox.error.borderWidth = 0;
+stylesheet.textbox.normal.marginBottom = 0;
+stylesheet.textbox.error.marginBottom = 0;
+
+
+stylesheet.textboxView.normal.borderWidth = 0;
+stylesheet.textboxView.normal.borderColor = '#d3d3d4';
+stylesheet.textboxView.error.borderWidth = 0;
+stylesheet.textboxView.normal.borderRadius = 0;
+stylesheet.textboxView.error.borderRadius = 0;
+stylesheet.textboxView.normal.borderBottomWidth = 1;
+stylesheet.textboxView.error.borderBottomWidth = 1;
+stylesheet.textbox.normal.marginBottom = 5;
+stylesheet.textbox.error.marginBottom = 5;
 
 
 const User = t.struct({
@@ -30,7 +49,8 @@ const options = {
     stylesheet: stylesheet,
     fields: {
         email: {
-            placeholder: 'Your email address'
+            placeholder: 'Your email address',
+            error: 'Insert a valid email'
         },
         pin: {
             placeholder: 'Enter PIN',
@@ -38,9 +58,7 @@ const options = {
     },
 };
 
-
 export default class Login extends React.Component {
-
     constructor(props){
         super(props);
         this.state = {
@@ -57,6 +75,7 @@ export default class Login extends React.Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -66,25 +85,22 @@ export default class Login extends React.Component {
 
                 <Image source={require('../../assets/wp.png')} style={{width: 100, height: 100}} />
 
-                {
-                    this.props.readiness ? (
-                        <Text style={styles.welcome}>
-                            Welcome to Lending App!
-                        </Text>
-                    ):null
-                }
+                <Text style={styles.welcome}>
+                    Login to Lending App!
+                </Text>
 
                 <Form
                     ref={c => this._loginform = c}
                     type={User}
                     options={options}/>
 
-                <TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='#76b3dc'>
-                    <Text style={styles.buttonText}>Login</Text>
+                <TouchableHighlight style={styles.button} onPress={() => {this.handleSubmit; navigate('Dashboard'); }}  underlayColor='#76b3dc'>
+                    <Text style={styles.buttonText}>SIGN IN</Text>
                 </TouchableHighlight>
 
-                <Text style={styles.instructions}>
-                    Create an account here
+                <Text style={styles.instructions}
+                      onPress={() => navigate('Register')}>
+                    Create an account
                 </Text>
 
             </View>
@@ -109,7 +125,9 @@ const styles = StyleSheet.create({
         marginBottom:15
     },
     instructions:{
-        color:'#d3d3d4'
+        color:'#d3d3d4',
+        marginTop: 5,
+        fontSize: 16
     },
     buttonText: {
         fontSize: 18,
@@ -117,7 +135,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     button: {
-        height: 36,
+        marginTop:10,
+        height: 50,
         backgroundColor: '#76b3dc',
         borderColor: '#76b3dc',
         borderWidth: 1,

@@ -1,7 +1,28 @@
 import React from 'react';
 import { Font } from 'expo';
+import { StackNavigator } from 'react-navigation';
 
 import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
+import Dashboard from "./components/pages/Dashboard";
+
+const RootStack = StackNavigator(
+    {
+        Login: {
+            screen: Login,
+        },
+        Register: {
+            screen: Register,
+        },
+        Dashboard: {
+            screen: Dashboard,
+        },
+    },
+    {
+        initialRouteName: 'Login',
+        headerMode: 'none',
+    }
+);
 
 export default class App extends React.Component {
 
@@ -21,10 +42,6 @@ export default class App extends React.Component {
     }
 
   render() {
-
-    return (
-        <Login readiness={this.state.isReady}/>
-    );
-
+      return this.state.isReady ? <RootStack/> : null
   }
 }
