@@ -3,20 +3,53 @@ import {
     StyleSheet,
     Text,
     View,
-    StatusBar
+    TouchableOpacity
 } from 'react-native';
+import {
+    Header,
+    Tile,
+    Card
+} from 'react-native-elements';
 
 export default class Home extends React.Component {
     render() {
         return(
-            <View style={styles.container}>
-                <StatusBar
-                    barStyle="light-content"
-                    backgroundColor="#4F6D7A"
+            <View>
+                <Header
+                    statusBarProps={{ barStyle: 'light-content',backgroundColor: "#4F6D7A" }}
+                    outerContainerStyles={{ backgroundColor: '#30396c' }}
+                    leftComponent={{ icon: 'menu', color: '#fff'}}
+                    centerComponent={{ text: 'LENDING ASSISTANT', style: { color: '#76b3dc',fontWeight:'600',fontSize: 15,fontFamily: 'proxima-nova-regular' } }}
                 />
-                <Text style={styles.welcome}>
-                    Welcome to Lending App!
-                </Text>
+                <Tile
+                    style={{paddingTop: '0', paddingBottom: '0'}}
+                    imageSrc={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRinc8uAMmTqS4J4aVvifVMtNlIXxest8WB0o-Wwe2q-s7bxwC04Q'}}
+                    title="Hi Kevin, Good morning"
+                    featured
+                    caption="Some Caption Text"
+                />
+                <Card>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanStatus')}>
+                        <Text style={styles.card}>
+                            Check my Status
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+
+                <Card>
+                    <TouchableOpacity  onPress={() => console.log('Apply for a loan')}>
+                        <Text style={styles.card}>
+                            Apply for loan
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
+                <Card>
+                    <TouchableOpacity onPress={() => console.log('Increase my Rating')}>
+                        <Text style={styles.card}>
+                            Increase my Ratings
+                        </Text>
+                    </TouchableOpacity>
+                </Card>
             </View>
         );
     }
@@ -29,11 +62,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#30396c',
     },
-    welcome: {
-        fontFamily: 'proxima-nova-regular',
-        textAlign: 'center',
-        margin: 10,
-        color: '#f7f7f7',
-        fontSize: 30,
-    },
+    card: {
+        color:'#8b91a3',
+        fontWeight: '400',
+        justifyContent: 'center',
+        marginBottom: 5,
+        fontFamily:'proxima-nova-regular',
+        alignItems:'center',
+        fontSize: 20
+
+    }
 });

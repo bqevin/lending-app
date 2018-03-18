@@ -7,6 +7,7 @@ import {
     View,
     StyleSheet
 } from 'react-native';
+import {Avatar} from 'react-native-elements';
 import LoanStatus from './LoanStatus';
 import Home from './Home';
 
@@ -21,32 +22,38 @@ class SideMenu extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <View>
+                    <View style={{paddingTop: 20, paddingLeft: 20}}>
+                        <Avatar
+                            large
+                            rounded
+                            title="KB"
+                            activeOpacity={0.7}
+                        />
                         <Text style={styles.sectionHeadingStyle}>
-                            Section 1
+                            DASHBOARD
                         </Text>
                         <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Home')}>
                                 Home
                             </Text>
                             <Text style={styles.navItemStyle} onPress={this.navigateToScreen('LoanStatus')}>
-                                Loan Status
+                                My Loan Status
                             </Text>
                         </View>
                     </View>
-                    <View>
+                    <View style={{paddingLeft: 20}}>
                         <Text style={styles.sectionHeadingStyle}>
-                            Section 2
+                            EXTRAS
                         </Text>
                         <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle}>
-                                Page 3
+                                Invite Friends
                             </Text>
                         </View>
                     </View>
                 </ScrollView>
                 <View style={styles.footerContainer}>
-                    <Text>Lending App &copy 2018</Text>
+                    <Text style={{color: '#fff'}}>Lending App &copy; 2018</Text>
                 </View>
             </View>
         );
@@ -56,21 +63,29 @@ class SideMenu extends React.Component {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 20,
-        flex: 1
+        flex: 1,
+        backgroundColor: '#30396c',
     },
     navItemStyle: {
-        padding: 10
+        padding: 10,
+        color: '#d3d3d4',
+        fontSize:16
     },
     navSectionStyle: {
-        backgroundColor: 'lightgrey'
+
     },
     sectionHeadingStyle: {
+        color: '#76b3dc',
         paddingVertical: 10,
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
+        fontWeight: 'bold',
+        fontSize: 16
     },
     footerContainer: {
         padding: 20,
-        backgroundColor: 'lightgrey'
+        backgroundColor: '#76b3dc',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
