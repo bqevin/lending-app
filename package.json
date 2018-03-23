@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "eslint": "^4.19.1",
     "expo": "^25.0.0",
     "lodash": "^4.17.5",
     "native-base": "^2.3.10",
