@@ -16,23 +16,53 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       tips : [
-        "The best things in life aren't things!", 
-        "Most of the things your worry about in life never happens",
-        "The future belongs to the few of us willing to get our hands dirty",
-        "Work hard and be nice to people",
-        "Those we meet change us forever",
-        "Be happy for this moment. This moment is your life.",
-        "Shutdown computer. Go outside meet someone",
-        "I want to spend all my life getting out of debt with you"
+        "Money is the opposite of the weather. Nobody talks about it, but everybody does something about it. – Rebecca Johnson", 
+        "The safest way to double your money is to fold it over and put it in your pocket. – Kin Hubbard",
+        "Money is not the most important thing in the world. Love is. Fortunately, I love money. – Jackie Mason",
+        "Money is better than poverty, if only for financial reasons. – Woody Allen",
+        "Money is not the most important thing in the world. Love is. Fortunately, I love money. – Jackie Mason",
+        "Money is better than poverty, if only for financial reasons. – Woody Allen",
+        "Money is like a sixth sense – and you can't make use of the other five without it. – William Somerset Maugha"
       ],
-      tipText: undefined
+      backgroundImages: {
+        morning: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbsIo24trDWRJnvGxevNPTuXlVu4HDIRaViBBGneeQtOENVqXc",
+        day: "http://cakta.com/data/out/124/403555365-sunny-day.jpg",
+        evening: "https://4.bp.blogspot.com/-F7g8AIcFnxo/WLfhEXjKB5I/AAAAAAAACRI/pMZaKjXvJ4YpKcmWwke1hhXGO9SWsihUACLcB/s1600/Good%2Bevening%2Bsms1.JPG",
+        night : "http://iliketowastemytime.com/sites/default/files/night-wallpaper.jpg"
+      },
+      tipText: undefined,
+      greeting: '',
+      displayImage:''
     };
   }
+
+  captionText(){
+    let tipText = this.state.tips[Math.floor(Math.random()*this.state.tips.length)];
+    return this.setState({ tipText});
+  }
+  systemGreetings(){
+     let greeting, today;
+     today = new Date().getHours();
+     if (today < 12) {
+       greeting = 'Good Morning';
+       this.setState({displayImage: this.state.backgroundImages.morning})
+      }
+      if (today >= 12 && today < 16) {
+        greeting = 'Good Afternoon';
+        this.setState({displayImage: this.state.backgroundImages.day})
+      } else  if (today >= 16 && today < 19) {
+        greeting = 'Good Evening';
+        this.setState({displayImage: this.state.backgroundImages.evening})
+      }  else if (today >= 19) {
+        greeting = 'Good Night';
+        this.setState({displayImage: this.state.backgroundImages.night})
+      }
+    return this.setState({greeting });
+  }
   componentWillMount(){
-     let tipText;
-     tipText = this.state.tips[Math.floor(Math.random()*this.state.tips.length)];
-    this.setState({ tipText });
-  
+    this.captionText();
+    this.systemGreetings();
+    
   }
     render() {
         return <View>
@@ -43,8 +73,9 @@ export default class Home extends React.Component {
               centerComponent={{ text: "LENDING ASSISTANT", style: { color: "#76b3dc", fontWeight: "600", fontSize: 15, fontFamily: "proxima-nova-regular" } }} 
             />
             <Tile style={{ paddingTop: "0", paddingBottom: "0", height: "180" }} 
-              imageSrc={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRinc8uAMmTqS4J4aVvifVMtNlIXxest8WB0o-Wwe2q-s7bxwC04Q" }} 
-              title="Hi Kevin, Good morning" featured 
+              height="auto"
+              imageSrc={{ uri: this.state.displayImage }} 
+              title={"Hi Kevin, "+this.state.greeting} featured 
               caption={this.state.tipText} 
               imageContainerStyle={{ height: 180 }} 
             />
