@@ -17,9 +17,10 @@ export default class LoanStatus extends React.Component {
         return(
             <View style={{flex:1}}>
                 <ParallaxScrollView
+                    contentBackgroundColor="#fff"
                     backgroundColor="#30396c"
-                    contentBackgroundColor="#30396c"
                     parallaxHeaderHeight={230}
+                    contentContainerStyle={{minHeight:750, backgroundColor:'#fff'}}
                     // renderBackground={() => <Image source={{ uri: `https://placekitten.com/414/230`, width: window.width, height: 230 }}/>}
                     renderForeground={() => (
                         <View style={{ height: 230, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -29,11 +30,11 @@ export default class LoanStatus extends React.Component {
                                 title="LM"
                                 activeOpacity={0.7}
                             />
-                            <Text style={{fontSize:20,fontWeight:'600',fontFamily:'proxima-nova-regular',color: '#f7f7f7',margin: 10,}}>Lee Maina</Text>
-                            <Text style={{fontSize:18,fontFamily:'proxima-nova-regular',color: '#f7f7f7',margin: 0,}}>Male, 29</Text>
+                            <Text style={[styles.text, {fontSize:20, fontWeight:'600', margin: 10}]}>Lee Maina</Text>
+                            <Text style={[styles.text, {fontSize:18, margin: 0}]}>Male, 29</Text>
                         </View>
                     )}>
-                    <Container style={{marginBottom:100}}>
+                    <Container>
                         <Header hasTabs style={{backgroundColor:'#30396c', height:0}}/>
                         <Tabs initialPage={0}>
                             <Tab heading="Loan Offer" style={{backgroundColor:'#30396c'}}>
@@ -58,7 +59,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#30396c',
-        height: 500
+        height: "auto"
     },
+    text: {
+        fontFamily:'proxima-nova-regular',
+        color: '#f7f7f7',
+    }
 });

@@ -7,6 +7,7 @@ import {
 import { Constants } from 'expo';
 import { Card, ButtonGroup, Button, Slider } from 'react-native-elements';
 import { Grid, Col} from 'react-native-easy-grid';
+import { ConfirmLoan } from '../Overlays/ConfirmLoan';
 
 const component1 = () => <Text>One Day</Text>;
 const component2 = () => <Text>One Week</Text>;
@@ -17,17 +18,18 @@ export default class Offer extends React.Component {
         super(props);
         this.state = {
             value : 1000,
-            minValue:1000,
-            maxValue:50000,
+            minValue: 1000,
+            maxValue: 50000,
             selectedAmt: 0,
-            selectedTerm:0
+            selectedTerm: 0,
+            confirmLoan: false
         };
         this.updateIndex = this.updateIndex.bind(this);
         this.updateAmt = this.updateAmt.bind(this);
         this.updateTerm = this.updateTerm.bind(this);
     }
     updateAmt (selectedAmt) {
-        this.setState({selectedAmt})
+      this.setState({selectedAmt})
     }
     updateTerm (selectedTerm) {
         this.setState({selectedTerm})
@@ -40,7 +42,7 @@ export default class Offer extends React.Component {
         const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }];
         const loans = ['1000', '2000', '3000'];
         const {  selectedAmt, selectedTerm } = this.state;
-        return <View>
+        return <View style={{backgroundColor:"#fff"}}>
             <View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", marginTop: 80 }}>
               <Slider style={{ marginLeft: 20, paddingRight: 20 }} minimumValue={this.state.minValue} maximumValue={this.state.maxValue} step={this.state.minValue} value={this.state.value} minimumTrackTintColor="#80cb84" maximumTrackTinkColor="#80cb84" thumbTintColor="#80cb84" onValueChange={value => this.setState(
                     { value }
@@ -58,6 +60,7 @@ export default class Offer extends React.Component {
                 Current Amount: {this.state.value}
               </Text>
             </View>
+            
             <Card>
               <Text style={styles.header}>
                 Select amounts you want loaned
@@ -71,7 +74,6 @@ export default class Offer extends React.Component {
                 The quicker you pay, less interest you pay
               </Text>
             </Card>
-
             <Card>
               <View>
                 <Grid style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -103,7 +105,12 @@ export default class Offer extends React.Component {
                 Due Date: 01/03/2018
               </Text>
             </Card>
-            <Button icon={{ name: "send" }} backgroundColor="#80cb84" fontFamily="proxima-nova-regular" buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }} title="SEND LOAN" />
+            <Button 
+              onPress={()=> this.setState({ confirmLoan: true })}
+              icon={{ name: "send" }} 
+              backgroundColor="#80cb84"
+              buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 20, marginTop: 20 }} 
+              title="SEND LOAN" />
           </View>;
     }
 }

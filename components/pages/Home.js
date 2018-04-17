@@ -32,13 +32,14 @@ export default class Home extends React.Component {
       },
       tipText: undefined,
       greeting: '',
-      displayImage:''
+      displayImage: ''
     };
   }
 
   captionText(){
-    let tipText = this.state.tips[Math.floor(Math.random()*this.state.tips.length)];
-    return this.setState({ tipText});
+    let tips = this.state.tips
+    let tipText = tips[Math.floor(Math.random()*tips.length)];
+    return this.setState({tipText});
   }
   systemGreetings(){
      let greeting, today;
@@ -65,6 +66,7 @@ export default class Home extends React.Component {
     
   }
     render() {
+      let { tipText, displayImage, greeting } = this.state;
         return <View>
             <Header 
               statusBarProps={{ barStyle: "light-content", backgroundColor: "#4F6D7A" }}
@@ -73,10 +75,9 @@ export default class Home extends React.Component {
               centerComponent={{ text: "LENDING ASSISTANT", style: { color: "#76b3dc", fontWeight: "600", fontSize: 15, fontFamily: "proxima-nova-regular" } }} 
             />
             <Tile style={{ paddingTop: "0", paddingBottom: "0", height: "180" }} 
-              height="auto"
-              imageSrc={{ uri: this.state.displayImage }} 
-              title={"Hi Kevin, "+this.state.greeting} featured 
-              caption={this.state.tipText} 
+              imageSrc={{ uri: displayImage }} 
+              title={`Hi Kevin, ${greeting}`} featured 
+              caption={tipText} 
               imageContainerStyle={{ height: 180 }} 
             />
             <Card>
@@ -88,7 +89,7 @@ export default class Home extends React.Component {
 
             <Card>
               <TouchableOpacity onPress={() => console.log("Apply for a loan")}>
-                <Text style={styles.card}>Apply for loan</Text>
+                <Text style={ styles.card}>Apply for loan</Text>
                 <Text>Get your loan now</Text>
               </TouchableOpacity>
             </Card>
