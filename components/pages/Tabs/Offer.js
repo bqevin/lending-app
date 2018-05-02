@@ -7,7 +7,7 @@ import {
 import { Constants } from 'expo';
 import { Card, ButtonGroup, Button, Slider } from 'react-native-elements';
 import { Grid, Col} from 'react-native-easy-grid';
-import { ConfirmLoan } from '../Overlays/ConfirmLoan';
+import ConfirmLoan from '../Overlays/ConfirmLoan';
 
 const component1 = () => <Text>One Day</Text>;
 const component2 = () => <Text>One Week</Text>;
@@ -28,20 +28,16 @@ export default class Offer extends React.Component {
         this.updateAmt = this.updateAmt.bind(this);
         this.updateTerm = this.updateTerm.bind(this);
     }
-    updateAmt (selectedAmt) {
-      this.setState({selectedAmt})
-    }
-    updateTerm (selectedTerm) {
-        this.setState({selectedTerm})
-    }
-    updateIndex (selectedIndex) {
-        this.setState({selectedIndex})
-    }
+    updateAmt (selectedAmt) { this.setState({selectedAmt}) }
+    updateTerm (selectedTerm) { this.setState({selectedTerm})}
+    updateIndex (selectedIndex) { this.setState({selectedIndex}) }
+    confirm(){ this.setState({confirmLoan: true}) }
 
     render() {
         const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }];
         const loans = ['1000', '2000', '3000'];
         const {  selectedAmt, selectedTerm } = this.state;
+        { this.state.confirmLoan }
         return <View style={{backgroundColor:"#fff"}}>
             <View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", marginTop: 80 }}>
               <Slider style={{ marginLeft: 20, paddingRight: 20 }} minimumValue={this.state.minValue} maximumValue={this.state.maxValue} step={this.state.minValue} value={this.state.value} minimumTrackTintColor="#80cb84" maximumTrackTinkColor="#80cb84" thumbTintColor="#80cb84" onValueChange={value => this.setState(
